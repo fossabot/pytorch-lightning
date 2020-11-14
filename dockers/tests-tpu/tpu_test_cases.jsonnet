@@ -4,7 +4,7 @@ local utils = import "templates/utils.libsonnet";
 
 local tputests = base.BaseTest {
   frameworkPrefix: 'pl',
-  modelName: 'tpu-tests',
+  modelName: 'tests-tpu',
   mode: 'postsubmit',
   configMaps: [],
 

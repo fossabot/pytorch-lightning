@@ -33,7 +33,7 @@ RUN \
 
 #RUN python -c "import pytorch_lightning as pl; print(pl.__version__)"
 
-COPY ./dockers/tpu-tests/docker-entrypoint.sh /usr/local/bin/
+COPY ./dockers/tests-tpu/docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]

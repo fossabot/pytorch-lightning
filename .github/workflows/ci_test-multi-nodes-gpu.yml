@@ -26,7 +26,7 @@ on: push
 
 env:
   AWS_CLUSTER: torch-elastic
-  NODE_TYPE: p3.2xlarge
+  NODE_TYPE: m5.xlarge
   NODES: 2
   NUM_GPUS: 1
   REGION: us-east-2

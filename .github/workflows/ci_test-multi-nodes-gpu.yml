@@ -101,6 +101,7 @@ jobs:
         fname = './.github/multi-nodes/multi-nodes-gpu.yaml'
         req = open(fname).read()
         req = req % {
+          'TCP_ADDRESS': '[TCP_ADDRESS]',
           'PYTHON_VERSION': '${{ matrix.python-version }}',
           'PYTHON_VERSION_DASH': '${{ steps.job.outputs.PYTHON_VERSION_DASH }}',
           'SHA': '${{ steps.vars.outputs.SHA }}',

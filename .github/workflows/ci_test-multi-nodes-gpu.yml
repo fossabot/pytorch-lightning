@@ -26,7 +26,7 @@ on: push
 
 env:
   AWS_CLUSTER: torch-elastic
-  NODE_TYPE: m5.xlarge
+  NODE_TYPE: p3.2xlarge
   NODES: 2
   NUM_GPUS: 1
   REGION: us-east-2
@@ -109,7 +109,7 @@ jobs:
     # eksclt create cluster --name=lightning-torchelastic --node-type=m5.xlarge --region=us-east-2 --nodes=2
     - name: Create Gpu Node Pool
       run: |
-        aws eks --region $REGION update-kubeconfig --name $AWS_CLUSTER
+        # aws eks --region $REGION update-kubeconfig --name $AWS_CLUSTER
         eksctl create nodegroup --name=${{ steps.job.outputs.ID }} --cluster=$AWS_CLUSTER --node-type=$NODE_TYPE  --nodes=$NODES
       shell: bash
 

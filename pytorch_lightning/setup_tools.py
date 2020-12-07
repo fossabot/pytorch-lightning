@@ -58,7 +58,7 @@ def _load_requirements(path_dir, file_name='requirements.txt', comment_char='#')
     return reqs
 
 
-def _parse_for_badge(text: str, path_badges: str = _PATH_BADGES, badge_names: list = _DEFAULT_BADGES):
+def _parse_for_badge(text: str, release_url: str = None, path_badges: str = _PATH_BADGES, badge_names: list = _DEFAULT_BADGES):
     """ Returns the new parsed text with url change with local downloaded files
 
     >>> _parse_for_badge('Some text here... '  # doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
@@ -82,20 +82,24 @@ def _parse_for_badge(text: str, path_badges: str = _PATH_BADGES, badge_names: li
             continue
 
         # download badge
-        saved_badge_name = _download_badge(badge_url, badge_name, path_badges)
+        badge_path = _download_badge(badge_url, badge_name, path_badges)
+        if release_url:
+            # https://github.com/Borda/pytorch-lightning/releases/download/1.1.0a6/codecov_badge.png
+            badge_fname = os.path.basename(badge_path)
+            badge_path = os.path.join(release_url, badge_fname)
 
         # replace url with local file path
-        text = text.replace(f'[![{badge_name}]({badge_url})]', f'[![{badge_name}]({saved_badge_name})]')
+        text = text.replace(f'[![{badge_name}]({badge_url})]', f'[![{badge_name}]({badge_path})]')
 
     return text
 
 
-def _save_file(url_badge, save, extension, headers):
+def _save_file(url_badge: str, save_path: str, extension: str, headers: dict):
     """function for saving the badge either in `.png` or `.svg`"""
 
     # because there are two badge with name `PyPI Status` the second one is download
     if 'https://pepy.tech/badge/pytorch-lightning' in url_badge:
-        save += '_downloads'
+        save_path += '_downloads'
 
     try:
         req = Request(url=url_badge, headers=headers)
@@ -103,8 +107,8 @@ def _save_file(url_badge, save, extension, headers):
     except URLError:
         warnings.warn("Error while downloading the badge", UserWarning)
     else:
-        save += extension
-        with open(save, 'wb') as download_file:
+        save_path += extension
+        with open(save_path, 'wb') as download_file:
             download_file.write(resp.read())
 
 
@@ -154,12 +158,15 @@ def _load_long_description(path_dir):
     >>> shutil.rmtree(_PATH_BADGES)
     """
     # https://github.com/PyTorchLightning/pytorch-lightning/raw/master/docs/source/_images/lightning_module/pt_to_pl.png
-    github_url = os.path.join(__homepage__, "raw", __version__,)
+    github_source_url = os.path.join(__homepage__, "raw", __version__)
     path_readme = os.path.join(path_dir, "README.md")
     text = open(path_readme, encoding="utf-8").read()
     # replace relative repository path to absolute link to the release
     #  do not replace all "docs" as in the readme we reger some other sources with particular path to docs
-    text = text.replace("docs/source/_images/", f"{os.path.join(github_url, 'docs/source/_images/')}")
+    text = text.replace("docs/source/_images/", f"{os.path.join(github_source_url, 'docs/source/_images/')}")
+
+    # https://github.com/Borda/pytorch-lightning/releases/download/1.1.0a6/codecov_badge.png
+    github_release_url = os.path.join(__homepage__, "releases", "download", __version__)
     # download badge and replace url with local file
-    text = _parse_for_badge(text)
+    text = _parse_for_badge(text, github_release_url)
     return text

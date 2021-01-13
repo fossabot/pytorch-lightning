@@ -1,0 +1,42 @@
+# Python package
+# Create and test a Python package on multiple Python versions.
+# Add steps that analyze code, save the dist with the build record, publish to a PyPI-compatible index, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/python
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+strategy:
+  matrix:
+    Python36:
+      python.version: '3.6'
+    Python37:
+      python.version: '3.7'
+    Python38:
+      python.version: '3.8'
+
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '$(python.version)'
+  displayName: 'Use Python $(python.version)'
+
+- script: |
+    python -m pip install "pip==20.1"
+    pip install --requirement requirements.txt --find-links https://download.pytorch.org/whl/cpu/torch_stable.html --quiet --upgrade
+    pip install --requirement ./requirements/devel.txt --find-links https://download.pytorch.org/whl/cpu/torch_stable.html --quiet --upgrade
+    python --version
+    pip --version
+    pip list
+  displayName: 'Install dependencies'
+
+- script: |
+    coverage run --source pytorch_lightning -m pytest pytorch_lightning tests pl_examples -v --durations=50
+  displayName: 'Testing'
+
+- script: |
+    coverage report
+    coverage xml
+  displayName: 'Statistics'

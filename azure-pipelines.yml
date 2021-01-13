@@ -40,14 +40,14 @@ steps:
     sudo apt-get install -y python3-distutils
     curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
     sudo python get-pip.py
-    python -m pip --version
     pip --version
   displayName: 'Install pip'
 
 - script: |
-    python -m pip install "pip==20.1"
-    pip install --requirement requirements.txt --find-links https://download.pytorch.org/whl/cpu/torch_stable.html --quiet --upgrade
-    pip install --requirement ./requirements/devel.txt --find-links https://download.pytorch.org/whl/cpu/torch_stable.html --quiet --upgrade
+    sudo apt-get install -y cmake
+    # python -m pip install "pip==20.1"
+    pip install --requirement requirements.txt
+    pip install --requirement ./requirements/devel.txt
     pip list
   displayName: 'Install dependencies'
 

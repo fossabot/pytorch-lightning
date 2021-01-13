@@ -47,7 +47,6 @@ steps:
 - bash: |
     sudo apt-get install -y cmake
     # python -m pip install "pip==20.1"
-    sudo pip install --requirement ./requirements/test.txt
     pip install --requirement requirements.txt --find-links https://download.pytorch.org/whl/cpu/torch_stable.html
     python -c "fname = 'requirements/extra.txt' ; lines = [line for line in open(fname).readlines() if 'fairscale' not in line] ; open(fname, 'w').writelines(lines)"
     python -c "fname = 'requirements/extra.txt' ; lines = [line for line in open(fname).readlines() if 'horovod' not in line] ; open(fname, 'w').writelines(lines)"
@@ -65,10 +64,10 @@ steps:
   displayName: 'Get legacy checkpoints'
 
 - bash: |
-    coverage run --source pytorch_lightning -m pytest pytorch_lightning tests pl_examples -v --durations=50
+    python -m coverage run --source pytorch_lightning -m pytest pytorch_lightning tests pl_examples -v --durations=50
   displayName: 'Testing'
 
 - bash: |
-    coverage report
-    coverage xml
+    python -m coverage report
+    python -m coverage xml
   displayName: 'Statistics'

@@ -36,6 +36,15 @@ steps:
   displayName: 'Install dependencies'
 
 - script: |
+    cd legacy
+    # wget is simpler but does not work on Windows
+    python -c "from urllib.request import urlretrieve ; urlretrieve('https://pl-public-data.s3.amazonaws.com/legacy/checkpoints.zip', 'checkpoints.zip')"
+    ls -l .
+    unzip -o checkpoints.zip
+    ls -l checkpoints/
+  displayName: 'Get legacy checkpoints'
+
+- script: |
     coverage run --source pytorch_lightning -m pytest pytorch_lightning tests pl_examples -v --durations=50
   displayName: 'Testing'
 

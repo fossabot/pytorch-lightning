@@ -11,8 +11,7 @@ pr:
   - master
   - release/*
 
-pool:
-  vmImage: 'ubuntu-latest'
+pool: cpu-agent-pool
 strategy:
   matrix:
     Python36:

@@ -13,8 +13,6 @@ pr:
 
 pool: cpu-agent-pool
 
-timeoutInMinutes: 25
-
 strategy:
   matrix:
     Python36:

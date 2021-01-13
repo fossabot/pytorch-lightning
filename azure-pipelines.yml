@@ -5,11 +5,11 @@
 
 trigger:
   branches:
-    - master
-    - *
-  pr:
-    - master
-    - releases/*
+    include:
+      - '*'  # must quote since "*" is a YAML reserved character; we want a string
+pr:
+  - master
+  - release/*
 
 pool:
   vmImage: 'ubuntu-latest'

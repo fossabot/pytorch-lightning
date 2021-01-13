@@ -27,6 +27,11 @@ steps:
 #  inputs:
 #    versionSpec: '$(python.version)'
 #  displayName: 'Use Python $(python.version)'
+- script: |
+    sudo apt-get install -y python$(python.version)
+    sudo update-alternatives --install /usr/bin/python python /usr/bin/python$(python.version) 1
+    sudo update-alternatives --config python
+  displayName: 'Install python'
 
 - script: |
     python --version

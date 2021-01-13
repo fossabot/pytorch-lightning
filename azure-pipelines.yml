@@ -22,16 +22,17 @@ strategy:
       python.version: '3.8'
 
 steps:
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '$(python.version)'
-  displayName: 'Use Python $(python.version)'
+# seems not supported on own machine
+#- task: UsePythonVersion@0
+#  inputs:
+#    versionSpec: '$(python.version)'
+#  displayName: 'Use Python $(python.version)'
 
 - script: |
+    python --version
     python -m pip install "pip==20.1"
     pip install --requirement requirements.txt --find-links https://download.pytorch.org/whl/cpu/torch_stable.html --quiet --upgrade
     pip install --requirement ./requirements/devel.txt --find-links https://download.pytorch.org/whl/cpu/torch_stable.html --quiet --upgrade
-    python --version
     pip --version
     pip list
   displayName: 'Install dependencies'

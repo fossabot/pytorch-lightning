@@ -21,7 +21,8 @@ strategy:
     Python38:
       python.version: '3.8'
 
-container: pytorchlightning/pytorch_lightning:base-cuda-py$[ variables['containerImage'] ]-torch1.6
+# ToDo: this need to have installed docker in the base image...
+#container: pytorchlightning/pytorch_lightning:base-cuda-py$[ variables['containerImage'] ]-torch1.6
 
 steps:
 # seems not supported on own machine
@@ -29,13 +30,22 @@ steps:
 #  inputs:
 #    versionSpec: '$(python.version)'
 #  displayName: 'Use Python $(python.version)'
-
+- script: |
+    sudo apt-get install -y python$(python.version)
+    sudo update-alternatives --install /usr/bin/python python /usr/bin/python$(python.version) 1
+    sudo update-alternatives --config python
+  displayName: 'Install python'
 - script: |
     python --version
+    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    python get-pip.py
+    pip --version
+  displayName: 'Install pip'
+
+- script: |
     python -m pip install "pip==20.1"
     pip install --requirement requirements.txt --find-links https://download.pytorch.org/whl/cpu/torch_stable.html --quiet --upgrade
     pip install --requirement ./requirements/devel.txt --find-links https://download.pytorch.org/whl/cpu/torch_stable.html --quiet --upgrade
-    pip --version
     pip list
   displayName: 'Install dependencies'
 

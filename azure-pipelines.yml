@@ -12,6 +12,9 @@ pr:
   - release/*
 
 pool: cpu-agent-pool
+
+timeoutInMinutes: 25
+
 strategy:
   matrix:
     Python36:
@@ -30,12 +33,12 @@ steps:
 #  inputs:
 #    versionSpec: '$(python.version)'
 #  displayName: 'Use Python $(python.version)'
-- script: |
+- bash: |
     sudo apt-get install -y python$(python.version)
     sudo update-alternatives --install /usr/bin/python python /usr/bin/python$(python.version) 1
     sudo update-alternatives --config python
   displayName: 'Install python'
-- script: |
+- bash: |
     python --version
     sudo apt-get install -y python3-distutils
     curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
@@ -43,7 +46,7 @@ steps:
     pip --version
   displayName: 'Install pip'
 
-- script: |
+- bash: |
     sudo apt-get install -y cmake
     # python -m pip install "pip==20.1"
     pip install --requirement requirements.txt --find-links https://download.pytorch.org/whl/cpu/torch_stable.html
@@ -51,7 +54,7 @@ steps:
     pip list
   displayName: 'Install dependencies'
 
-- script: |
+- bash: |
     cd legacy
     # wget is simpler but does not work on Windows
     python -c "from urllib.request import urlretrieve ; urlretrieve('https://pl-public-data.s3.amazonaws.com/legacy/checkpoints.zip', 'checkpoints.zip')"
@@ -60,11 +63,11 @@ steps:
     ls -l checkpoints/
   displayName: 'Get legacy checkpoints'
 
-- script: |
+- bash: |
     coverage run --source pytorch_lightning -m pytest pytorch_lightning tests pl_examples -v --durations=50
   displayName: 'Testing'
 
-- script: |
+- bash: |
     coverage report
     coverage xml
   displayName: 'Statistics'

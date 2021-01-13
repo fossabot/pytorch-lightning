@@ -21,17 +21,14 @@ strategy:
     Python38:
       python.version: '3.8'
 
+container: pytorchlightning/pytorch_lightning:base-cuda-py$[ variables['containerImage'] ]-torch1.6
+
 steps:
 # seems not supported on own machine
 #- task: UsePythonVersion@0
 #  inputs:
 #    versionSpec: '$(python.version)'
 #  displayName: 'Use Python $(python.version)'
-- script: |
-    sudo apt-get install -y python$(python.version)
-    sudo update-alternatives --install /usr/bin/python python /usr/bin/python$(python.version) 1
-    sudo update-alternatives --config python
-  displayName: 'Install python'
 
 - script: |
     python --version

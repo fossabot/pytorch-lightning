@@ -28,7 +28,7 @@ strategy:
 
 steps:
 - bash: |
-    sudo apt-get install -y cuda
+    # sudo apt-get install -y cuda
     nvidia-smi
   displayName: 'NVIDIA'
 # seems not supported on own machine

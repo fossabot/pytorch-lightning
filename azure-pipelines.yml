@@ -11,7 +11,7 @@ pr:
   - master
   - release/*
 
-pool: cpu-agent-pool
+pool: cpu-agents
 
 strategy:
   matrix:

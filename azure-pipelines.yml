@@ -28,10 +28,7 @@ strategy:
 
 steps:
 - bash: |
-    #sudo apt-get install -y ubuntu-drivers-common
-    #sudo ubuntu-drivers devices
-    #sudo ubuntu-drivers autoinstall
-    #sudo apt-get install -y nvidia-driver-450
+    sudo apt-get install -y cuda
     nvidia-smi
   displayName: 'NVIDIA'
 # seems not supported on own machine

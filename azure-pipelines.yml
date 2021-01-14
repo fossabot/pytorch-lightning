@@ -30,7 +30,7 @@ steps:
     sudo apt-get install -y ubuntu-drivers-common
     sudo ubuntu-drivers devices
     sudo ubuntu-drivers autoinstall
-    sudo apt-get install -y nvidia-driver-455
+    sudo apt-get install -y nvidia-driver-450
     nvidia-smi
   displayName: 'NVIDIA'
 # seems not supported on own machine

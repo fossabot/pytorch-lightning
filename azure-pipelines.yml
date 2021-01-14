@@ -27,6 +27,8 @@ strategy:
 
 steps:
 - bash: |
+    sudo ubuntu-drivers devices
+    sudo apt install nvidia-driver-455
     nvidia-smi
   displayName: 'NVIDIA'
 # seems not supported on own machine

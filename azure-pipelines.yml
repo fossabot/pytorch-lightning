@@ -26,6 +26,9 @@ strategy:
 #container: pytorchlightning/pytorch_lightning:base-cuda-py$[ variables['containerImage'] ]-torch1.6
 
 steps:
+- bash: |
+    nvidia-smi
+  displayName: 'NVIDIA'
 # seems not supported on own machine
 #- task: UsePythonVersion@0
 #  inputs:

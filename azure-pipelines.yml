@@ -11,7 +11,7 @@ pr:
   - master
   - release/*
 
-pool: spot-agents
+pool: dsvm-agents
 
 strategy:
   matrix:

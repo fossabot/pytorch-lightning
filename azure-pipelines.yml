@@ -25,30 +25,30 @@ strategy:
 # ToDo: this need to have installed docker in the base image...
 # base ML image: mcr.microsoft.com/azureml/openmpi3.1.2-cuda10.2-cudnn8-ubuntu18.04
 #container: pytorchlightning/pytorch_lightning:base-cuda-py3.7-torch1.6
-container: "pytorchlightning/pytorch_lightning:base-cuda-py$[ variables['python.version'] ]-torch1.6"
+#container: "pytorchlightning/pytorch_lightning:base-cuda-py$[ variables['python.version'] ]-torch1.6"
 
 steps:
-#- bash: |
-#    # sudo apt-get install -y cuda
-#    nvidia-smi
-#  displayName: 'NVIDIA'
-# seems not supported on own machine
+- bash: |
+    # sudo apt-get install -y cuda
+    nvidia-smi
+  displayName: 'NVIDIA'
+ seems not supported on own machine
 #- task: UsePythonVersion@0
 #  inputs:
 #    versionSpec: '$(python.version)'
 #  displayName: 'Use Python $(python.version)'
-#- bash: |
-#    sudo apt-get install -y python$(python.version)
-#    sudo update-alternatives --install /usr/bin/python python /usr/bin/python$(python.version) 1
-#    sudo update-alternatives --config python
-#  displayName: 'Install python'
-#- bash: |
-#    python --version
-#    sudo apt-get install -y python3-distutils
-#    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-#    sudo python get-pip.py
-#    pip --version
-#  displayName: 'Install pip'
+- bash: |
+    sudo apt-get install -y python$(python.version)
+    sudo update-alternatives --install /usr/bin/python python /usr/bin/python$(python.version) 1
+    sudo update-alternatives --config python
+  displayName: 'Install python'
+- bash: |
+    python --version
+    sudo apt-get install -y python3-distutils
+    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    sudo python get-pip.py
+    pip --version
+  displayName: 'Install pip'
 
 - bash: |
     sudo apt-get install -y cmake

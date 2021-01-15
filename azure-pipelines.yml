@@ -27,8 +27,8 @@ strategy:
 #container: pytorchlightning/pytorch_lightning:base-cuda-py3.7-torch1.6
 #container: "pytorchlightning/pytorch_lightning:base-cuda-py$[ variables['python.version'] ]-torch1.6"
 container:
-    image: wopauli01234567.azurecr.io/ubuntu-16.04_cuda9:latest
-    endpoint: azureContainerRegistryConnection
+    image: mcr.microsoft.com/azureml/openmpi3.1.2-cuda10.2-cudnn8-ubuntu18.04
+    #endpoint: azureContainerRegistryConnection
     options: "--runtime=nvidia -e NVIDIA_VISIBLE_DEVICES=all"
 
 steps:

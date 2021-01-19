@@ -27,7 +27,7 @@ strategy:
 #container: pytorchlightning/pytorch_lightning:base-cuda-py3.7-torch1.6
 #container: "pytorchlightning/pytorch_lightning:base-cuda-py$[ variables['python.version'] ]-torch1.6"
 container:
-    image: "pytorchlightning/pytorch_lightning:base-cuda-py$[ variables['python.version'] ]-torch1.6"
+    image: "pytorchlightning/pytorch_lightning:base-cuda-py3.7-torch1.6"
     #endpoint: azureContainerRegistryConnection
     options: "--runtime=nvidia -e NVIDIA_VISIBLE_DEVICES=all"
 
@@ -38,6 +38,7 @@ steps:
     nvidia-smi
     python --version
     pip --version
+    pip list
   displayName: 'NVIDIA'
 
 - bash: |

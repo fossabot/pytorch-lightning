@@ -37,7 +37,7 @@ steps:
     whereis nvidia
     nvidia-smi
     python --version
-    pip --verson
+    pip --version
   displayName: 'NVIDIA'
 
 - bash: |

@@ -36,22 +36,12 @@ steps:
     lspci | egrep 'VGA|3D'
     whereis nvidia
     nvidia-smi
-  displayName: 'NVIDIA'
-- bash: |
-    sudo apt-get install -y python$(python.version)
-    sudo update-alternatives --install /usr/bin/python python /usr/bin/python$(python.version) 1
-    sudo update-alternatives --config python
-  displayName: 'Install python'
-- bash: |
     python --version
-    sudo apt-get install -y python3-distutils
-    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-    sudo python get-pip.py
-    pip --version
-  displayName: 'Install pip'
+    pip --verson
+  displayName: 'NVIDIA'
 
 - bash: |
-    sudo apt-get install -y cmake
+    #sudo apt-get install -y cmake
     # python -m pip install "pip==20.1"
     pip install --requirement requirements.txt --find-links https://download.pytorch.org/whl/cpu/torch_stable.html
     python -c "fname = 'requirements/extra.txt' ; lines = [line for line in open(fname).readlines() if 'fairscale' not in line] ; open(fname, 'w').writelines(lines)"

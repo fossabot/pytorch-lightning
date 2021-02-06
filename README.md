@@ -26,6 +26,7 @@ Scale your models, not the boilerplate.**
 [![Conda](https://img.shields.io/conda/v/conda-forge/pytorch-lightning?label=conda&color=success)](https://anaconda.org/conda-forge/pytorch-lightning)
 [![DockerHub](https://img.shields.io/docker/pulls/pytorchlightning/pytorch_lightning.svg)](https://hub.docker.com/r/pytorchlightning/pytorch_lightning)
 [![codecov](https://codecov.io/gh/PyTorchLightning/pytorch-lightning/branch/master/graph/badge.svg)](https://codecov.io/gh/PyTorchLightning/pytorch-lightning)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FBorda%2Fpytorch-lightning.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FBorda%2Fpytorch-lightning?ref=badge_shield)
 
 [![ReadTheDocs](https://readthedocs.org/projects/pytorch-lightning/badge/?version=stable)](https://pytorch-lightning.readthedocs.io/en/stable/)
 [![Slack](https://img.shields.io/badge/slack-chat-green.svg?logo=slack)](https://join.slack.com/t/pytorch-lightning/shared_invite/zt-f6bl2l0l-JYMK3tbAgAmGRrlNr00f1A)
@@ -36,6 +37,9 @@ Scale your models, not the boilerplate.**
 [![CodeFactor](https://www.codefactor.io/repository/github/pytorchlightning/pytorch-lightning/badge)](https://www.codefactor.io/repository/github/pytorchlightning/pytorch-lightning)
 -->
 </div>
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FBorda%2Fpytorch-lightning.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FBorda%2Fpytorch-lightning?ref=badge_large)
 
 ###### *Codecov is > 90%+ but build delays may show less
 
